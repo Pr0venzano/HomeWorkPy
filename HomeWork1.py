@@ -35,3 +35,26 @@ print(f'Введённое время в часовом формате: {h}:{m}:
 n = input("Введите число: ")
 result = int(n) + int(n+n) + int(n+n+n)
 print(f'Сумма чисел {n}, {n+n} и {n+n+n} = {result}')
+
+
+# 4. Пользователь вводит целое положительное число. Найдите самую большую цифру в числе.
+# Для решения используйте цикл while и арифметические операции.
+
+user_number = input('Введите целое положительно число: ')
+
+while float(user_number) % 1 != 0 or float(user_number) < 0:  # проверка введённого числа
+    user_number = input('Вы ввели некорректное число. Введите целое положительно число: ')
+
+last_digit = int(user_number) % 10
+user_number = int(user_number) // 10
+result = 0
+while user_number or last_digit:
+    if last_digit > 8:
+        result = last_digit
+        break
+    elif last_digit > result:
+        result = last_digit
+    last_digit = user_number % 10
+    user_number = user_number // 10
+
+print('Наибольшее число ', result)
