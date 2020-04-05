@@ -56,3 +56,34 @@ print(f'{user_month}-й месяц это {seasons_list[user_month-1]}')  # че
 user_list = input('Введите несколько слов через пробел: ').split()
 for n in enumerate(user_list, 1):
     print(n[0], n[1][:10])
+
+
+# 5. Реализовать структуру «Рейтинг», представляющую собой не возрастающий набор натуральных чисел.
+# У пользователя необходимо запрашивать новый элемент рейтинга.
+# Если в рейтинге существуют элементы с одинаковыми значениями,
+# то новый элемент с тем же значением должен разместиться после них.
+# Подсказка. Например, набор натуральных чисел: 7, 5, 3, 3, 2.
+# Пользователь ввел число 3. Результат: 7, 5, 3, 3, 3, 2.
+# Пользователь ввел число 8. Результат: 8, 7, 5, 3, 3, 2.
+# Пользователь ввел число 1. Результат: 7, 5, 3, 3, 2, 1.
+# Набор натуральных чисел можно задать непосредственно в коде, например, my_list = [7, 5, 3, 3, 2].
+
+rate_list = [7, 5, 3, 3, 2]
+user_rate = int(input('Введите новый элемент рейтинга (целое число): '))
+
+while True:
+    if user_rate > rate_list[0]:
+        rate_list.insert(0, user_rate)
+        break
+    else:
+        rate_list.reverse()
+        if user_rate in rate_list:
+            rate_list.insert(rate_list.index(user_rate), user_rate)
+        else:
+            for m in rate_list:
+                if user_rate < m:
+                    rate_list.insert(rate_list.index(m), user_rate)
+                    break
+        rate_list.reverse()
+        break
+print(rate_list)
