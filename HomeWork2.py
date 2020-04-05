@@ -6,3 +6,22 @@ new_list = ('abc', 123, 4.5, complex(5, -3), True, None, [1, 2, 3], ('ab', 'bc',
 
 for i in range(len(new_list)):
     print(f'{new_list[i]} - {type(new_list[i])}')
+
+
+# 2. Для списка реализовать обмен значений соседних элементов, т.е.
+# Значениями обмениваются элементы с индексами 0 и 1, 2 и 3 и т.д.
+# При нечетном количестве элементов последний сохранить на своем месте.
+# для заполнения списка элементов необходимо использовать функцию input().
+
+new_list2 = list(input('Введите произвольное количество символов для заполнения списка: '))
+
+# через range(старт, стоп, шаг)
+for k in range(0, len(new_list2)-1, 2):
+    new_list2[k], new_list2[k+1] = new_list2[k+1], new_list2[k]
+
+# через range(стоп)
+# for k in range(len(new_list2)-1):
+#     if k % 2 == 0:
+#         new_list2[k], new_list2[k + 1] = new_list2[k + 1], new_list2[k]
+
+print(new_list2)
