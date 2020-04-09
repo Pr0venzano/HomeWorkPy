@@ -36,3 +36,11 @@ def user_info(**kwargs):
 
 
 user_info(first_name='Ivan', second_name='Petrov', year=1970, city='USSR', email='i_petrov@mail.ru', phone_number=123)
+
+
+# # 3. Реализовать функцию my_func(), которая принимает три позиционных аргумента
+# и возвращает сумму наибольших двух аргументов.
+
+my_func = lambda a, b, c: a + b + c - min(a, b, c)  # через lambda-функцию, как доп требование к задаче
+""" Сумирует два наимбольших числа из трёх, путём вычитания наименьшего числа из общей суммы """
+print(my_func(30, 10, 20))
