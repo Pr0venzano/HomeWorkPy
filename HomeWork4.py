@@ -20,3 +20,9 @@ print(f'Зарплата = {salary(int(production), int(rate), int(bonus))}')
 
 numbers = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]  # Пример исходного списка
 print(list(numbers[el] for el in range(1, len(numbers)) if numbers[el] > numbers[el-1]))  # [12, 44, 4, 10, 78, 123]
+
+
+# 3. Для чисел в пределах от 20 до 240 найти числа, кратные 20 или 21. Необходимо решить задание в одну строку.
+# Подсказка: использовать функцию range() и генератор.
+
+print(list(number for number in range(20, 240) if number % 20 == 0 or number % 21 == 0))  # 240 не включительно
