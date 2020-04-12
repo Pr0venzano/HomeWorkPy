@@ -35,3 +35,22 @@ print(list(number for number in range(20, 240) if number % 20 == 0 or number % 2
 
 numbers_2 = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]  # Пример исходного списка
 print(list(number for number in numbers_2 if numbers_2.count(number) == 1))  # [23, 1, 3, 10, 4, 11]
+
+
+# 5. Реализовать формирование списка, используя функцию range() и возможности генератора.
+# В список должны войти четные числа от 100 до 1000 (включая границы).
+# Необходимо получить результат вычисления произведения всех элементов списка.
+# Подсказка: использовать функцию reduce().
+
+import functools as ft  # импорт модуля через псевдоним (не занимает место в ОЗУ)
+from random import randrange  # импорт через from (сохраняет функцию в ОЗУ на время выполнения кода)
+
+
+def composition(prev_num, num):
+    """ получает 2 аргумента и возвращает их произведение """
+    return prev_num * num
+
+
+numbers_3 = list(randrange(100, 1001, 2) for number in range(4))
+print(f'Сгененрирован список 4х чётных чисел в диапазоне от 100 до 1000: {numbers_3}')
+print(f'Произведение всех этих чисел = {ft.reduce(composition, numbers_3)}')
