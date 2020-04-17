@@ -6,7 +6,7 @@ from sys import argv
 salary = lambda p, r, b: int(p) * int(r) + int(b)
 """ расчитывает заработную плату: (выроботка * ставку + премия) и выводит результат на печать """
 
-script_name, production, rate, bonus = argv
+script_name, production, rate, bonus = map(int, argv[1:])  # применить функцию int ко всем элементам
 print('Имя скрипта: ', script_name)
 print('Выроботка в часах: ', production)
 print('Ставка в час: ', rate)
@@ -55,6 +55,7 @@ numbers_3 = list(randrange(100, 1001, 2) for number in range(4))
 print(f'Сгененрирован список 4х чётных чисел в диапазоне от 100 до 1000: {numbers_3}')
 print(f'Произведение всех этих чисел = {ft.reduce(composition, numbers_3)}')
 
+print(ft.reduce(lambda a, b: a * b, [x for x in range(100, 1001, 2)]))  # через lambda
 
 # 6. Реализовать два небольших скрипта:
 # а) бесконечный итератор, генерирующий целые числа, начиная с указанного,
