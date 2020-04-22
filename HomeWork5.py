@@ -66,6 +66,14 @@ with open("text_4.txt", encoding='utf-8') as t_4:  # открыть сущест
         with open("text_4ru.txt", "a", encoding='utf-8') as t_4ru:  # открыть (или создать) файл на дозапись
             print(f'{result.text}\n', file=t_4ru)  # печать в файл 2 перевод текста файла 1
 
+# Альтернативное решение
+from googletrans import Translator  # модуль гугл переводчика
+
+with open("text_4ru.txt", "w", encoding='utf-8') as t_4ru:
+    with open("text_4.txt", encoding='utf-8') as t_4:
+        text = t_4.read()
+    t_4ru .write(Translator().translate(text, dest='ru'))
+
 
 # 5 Создать (программно) текстовый файл, записать в него программно набор чисел, разделенных пробелами.
 # Программа должна подсчитывать сумму чисел в файле и выводить ее на экран.
