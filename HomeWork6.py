@@ -177,3 +177,46 @@ f.show_speed()
 
 g = PoliceCar(100, 'Чёрный', 'Форд', True, True)
 g.pursuit_mode()
+
+
+# 5 Реализовать класс Stationery (канцелярская принадлежность). Определить в нем атрибут title
+# (название) и метод draw (отрисовка). Метод выводит сообщение “Запуск отрисовки.” Создать
+# три дочерних класса Pen (ручка), Pencil (карандаш), Handle (маркер). В каждом из классов
+# реализовать переопределение метода draw. Для каждого из классов метод должен выводить
+# уникальное сообщение. Создать экземпляры классов и проверить, что выведет описанный
+# метод для каждого экземпляра.
+
+class Stationery:
+    def __init__(self, title):
+        self.title = title
+
+    def Draw(self):
+        print("Запуск отрисовки.")
+
+
+class Pen(Stationery):
+    def Draw(self):
+        print(f'Запуск отрисовки. Ой, {self.title} потекла!')
+
+
+class Pencil(Stationery):
+    def Draw(self):
+        print(f'Запуск отрисовки при помощи {self.title}а.')
+
+
+class Handle(Stationery):
+    def Draw(self):
+        print(f'Запуск отрисовки. {self.title.title()} высох, послюнявить не поможет :).')
+
+
+h = Stationery('перьевая ручка')
+print(h.title)
+
+i = Pen('ручка')
+i.Draw()
+
+k = Handle('маркер')
+k.Draw()
+
+j = Pencil('карандаш')
+j.Draw()
