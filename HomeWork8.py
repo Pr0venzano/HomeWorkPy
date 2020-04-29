@@ -129,3 +129,38 @@ dig_2 = Complex(5, -7)
 print(dig_1 + dig_2)
 print(dig_1 * dig_2)
 test()
+
+# 4 Начните работу над проектом «Склад оргтехники». Создайте класс, описывающий склад. А
+# также класс «Оргтехника», который будет базовым для классов-наследников. Эти классы —
+# конкретные типы оргтехники (принтер, сканер, ксерокс). В базовом классе определить
+# параметры, общие для приведенных типов. В классах-наследниках реализовать параметры,
+# уникальные для каждого типа оргтехники.
+
+
+class Warehouse:
+    pass
+
+
+class OfficeEquipment:
+    def __init__(self, name, model):
+        self.name = name
+        self.model = model
+
+
+class Printer(OfficeEquipment):
+    def __init__(self, name, model, print_speed):
+        super().__init__(name, model)  # вариант с урока
+        # super(Printer, self).__init__(name, model)  # вариант, который предлагает PyCharm
+        self.print_speed = print_speed
+
+
+class Scaner(OfficeEquipment):
+    def __init__(self, name, model, scan_speed):
+        super().__init__(name, model)  # вариант с урока
+        self.scan_speed = scan_speed
+
+
+class Copier(OfficeEquipment):
+    def __init__(self, name, model, copy_speed):
+        super().__init__(name, model)  # вариант с урока
+        self.copy_speed = copy_speed
