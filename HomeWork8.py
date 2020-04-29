@@ -94,3 +94,38 @@ while True:
             result.append(int(inp_data))
     except OwnError as err:  # Наш собственный класс ошибки
         print(err)
+
+
+# 7 Реализовать проект «Операции с комплексными числами». Создайте класс «Комплексное число»,
+# реализуйте перегрузку методов сложения и умножения комплексных чисел. Проверьте работу проекта,
+# создав экземпляры класса (комплексные числа) и выполнив сложение и умножение созданных экземпляров.
+# Проверьте корректность полученного результата.
+
+def test():
+    """ Тест - проверка корректности работы методов класса Complex"""
+    print("#Test1 - ok" if str(dig_1 + dig_2) == str(complex(2, 5) + complex(5, -7)) else "#Test1 - fail")
+    print("#Test2 - ok" if str(dig_1 * dig_2) == str(complex(2, 5) * complex(5, -7)) else "#Test2 - fail")
+
+
+class Complex:
+    def __init__(self, digit_1=0, digit_2=0):
+        self.digit_1 = digit_1
+        self.digit_2 = digit_2
+        self.comp = complex(digit_1, digit_2)
+
+    def __repr__(self):
+        return f'{self.comp}'
+
+    def __add__(self, other):
+        return Complex(self.digit_1 + other.digit_1, self.digit_2 + other.digit_2)
+
+    def __mul__(self, other):
+        return Complex((self.digit_1 * other.digit_1) - (self.digit_2 * other.digit_2),
+                       (self.digit_1 * other.digit_2) + (self.digit_2 * other.digit_1))
+
+
+dig_1 = Complex(2, 5)
+dig_2 = Complex(5, -7)
+print(dig_1 + dig_2)
+print(dig_1 * dig_2)
+test()
