@@ -135,32 +135,104 @@ test()
 # конкретные типы оргтехники (принтер, сканер, ксерокс). В базовом классе определить
 # параметры, общие для приведенных типов. В классах-наследниках реализовать параметры,
 # уникальные для каждого типа оргтехники.
+# 5 Продолжить работу над первым заданием. Разработать методы, отвечающие за приём
+# оргтехники на склад и передачу в определенное подразделение компании. Для хранения
+# данных о наименовании и количестве единиц оргтехники, а также других данных, можно
+# использовать любую подходящую структуру, например словарь.
+# 6 Продолжить работу над вторым заданием. Реализуйте механизм валидации вводимых
+# пользователем данных. Например, для указания количества принтеров, отправленных на
+# склад, нельзя использовать строковый тип данных.
+# Подсказка: постарайтесь по возможности реализовать в проекте «Склад оргтехники»
+# максимум возможностей, изученных на уроках по ООП.
+
+
+class OwnError(Exception):  # обязательно потомом класса всех ошибок
+    """Собственный класс исключения"""
+    def __init__(self, txt):
+        self.txt = txt
 
 
 class Warehouse:
-    pass
+    """Класс склад - хранилище для техники"""
+    def __init__(self):
+        self.stock = {}
+
+    def add(self, item, quantity):  # добавить технику на склад
+        """добавление техники на склад"""
+        if not self.stock.get(str(item)):
+            self.stock.update({str(item): [quantity, item.param]})  # добавление нового
+        else:
+            result = self.stock.get(str(item))[0] + quantity
+            self.stock.update({str(item): [result, item.param]})  # добавление к существубщему
+
+    def move(self, item, quantity, where):  # переместить технику со склада в отдел
+        """перемещение техники со склада (вычитание/удаление)"""
+        try:
+            if not self.stock.get(str(item)):
+                raise OwnError(f'Not enough quantity in stock')
+        except OwnError as err:  # Собственный класс ошибки
+            print(err)
+        else:
+            try:
+                result = self.stock.get(str(item))[0] - quantity
+            except TypeError:
+                print('Invalid quantity')
+            else:  # перемещение в отдел
+                if result == 0:
+                    del self.stock[str(item)]  # удаление со склада
+                else:
+                    self.stock.update({str(item): [result, item.param]})  # вычитание со склада
+                print(f'{quantity} {item} moved to department {where}, {result} on stock.')
+
+    def __str__(self):
+        return f'{self.stock} on stocks.'
 
 
 class OfficeEquipment:
+    """Родительский класс Офисная техника"""
     def __init__(self, name, model):
         self.name = name
         self.model = model
 
+    def __str__(self):
+        return f'{self.name} {self.model}'
+
 
 class Printer(OfficeEquipment):
-    def __init__(self, name, model, print_speed):
+    """потомок офисной техники"""
+    def __init__(self, name, model, print_speed=0):
         super().__init__(name, model)  # вариант с урока
         # super(Printer, self).__init__(name, model)  # вариант, который предлагает PyCharm
-        self.print_speed = print_speed
+        self.param = print_speed
 
 
 class Scaner(OfficeEquipment):
-    def __init__(self, name, model, scan_speed):
-        super().__init__(name, model)  # вариант с урока
-        self.scan_speed = scan_speed
+    """потомок офисной техники"""
+    def __init__(self, name, model, scan_speed=0):
+        super().__init__(name, model)
+        self.param = scan_speed
 
 
 class Copier(OfficeEquipment):
-    def __init__(self, name, model, copy_speed):
-        super().__init__(name, model)  # вариант с урока
-        self.copy_speed = copy_speed
+    """потомок офисной техники"""
+    def __init__(self, name, model, copy_speed=0):
+        super().__init__(name, model)
+        self.param = copy_speed
+
+
+printer_1 = Printer('HP', 'l2110', 60)
+printer_2 = Printer('Brother', 'br30-70', 40)
+scaner_1 = Scaner('Xerox', 'C420', 50)
+copier_1 = Copier('Xerox', 'CX70', 30)
+print(printer_1)
+warehouse = Warehouse()
+warehouse.add(printer_1, 10)
+warehouse.add(printer_2, 5)
+warehouse.add(printer_2, 5)
+warehouse.add(scaner_1, 20)
+warehouse.add(copier_1, 10)
+print(warehouse)
+warehouse.move(printer_2, 'h', "Accounting")
+warehouse.move(printer_2, 5, "Accounting")
+warehouse.move(printer_2, 5, "Logistic")
+warehouse.move(printer_2, 5, "Marketing")
